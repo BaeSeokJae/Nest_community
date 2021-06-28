@@ -2,7 +2,7 @@ export const Paging = (page: any, totalPost: number) => {
   const maxPost = 10;
   const maxPage = 10;
   let currentPage = page ? parseInt(page) : 1;
-  const hidePost = page === 1 ? 0 : (page - 1) * maxPost;
+  const offset = page === 1 ? 0 : maxPost * (page - 1);
   const totalPage = Math.ceil(totalPost / maxPost);
 
   if (currentPage > totalPage) {
@@ -16,5 +16,5 @@ export const Paging = (page: any, totalPost: number) => {
     endPage = totalPage;
   }
 
-  return { startPage, endPage, hidePost, maxPost, totalPage, currentPage };
+  return { startPage, endPage, offset, maxPost, totalPage, currentPage };
 };

@@ -1,12 +1,21 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('posts')
 export class Post {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  parent_id: string;
+  @Column({
+    nullable: true,
+  })
+  parent_id?: string | null;
 
   @Column()
   title: string;
@@ -20,27 +29,37 @@ export class Post {
   @Column()
   owner_user_dp_name: string;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   view_count: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   comment_count: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   like_count: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   dislike_count: number;
 
-  @Column()
+  @Column({
+    default: true,
+  })
   visible: boolean;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @Column()
+  @DeleteDateColumn()
   deleted_at: Date;
 }

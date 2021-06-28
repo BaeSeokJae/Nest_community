@@ -22,6 +22,6 @@ export class CreatePostDto {
   readonly owner_user_dp_name: string;
 
   @IsOptional()
-  @IsString({ each: true })
+  @IsString()
   readonly tag_id: any;
 }

@@ -6,37 +6,38 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
-@Controller('posts')
+@Controller('community')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  @Get('/community/posts')
-  findAll(@Param('page') page: number) {
-    return this.postsService.findAll(page);
+  @Get('/posts')
+  allPosts(@Query('page') page: number) {
+    return this.postsService.allPosts(page);
   }
 
-  @Post('/community/posts')
+  @Post('posts')
   createPosts(@Body() createPostDto: CreatePostDto) {
     return this.postsService.createPosts(createPostDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  @Get('posts/:id')
+  findPost(@Param('id') id: string) {
+    return this.postsService.findPost(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  @Patch('posts/:id')
+  updatePost(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
+    return this.postsService.updatePost(id, updatePostDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  @Delete('posts/:id')
+  removePost(@Param('id') id: string) {
+    return this.postsService.removePost(id);
   }
 }
